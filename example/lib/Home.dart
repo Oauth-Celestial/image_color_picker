@@ -37,30 +37,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         ],
       )
 
-          // body: ImagePixels(
-          //     imageProvider: image.image,
-          //     builder: (context, testimg) {
-          //       return Column(
-          //         children: [
-          //           GestureDetector(
-          //             onTapDown: (postion) {
-          //               setState(() {
-          //                 x = postion.localPosition.dx.toInt();
-          //                 y = postion.localPosition.dy.toInt();
-          //                 print("{$x, $y}");
-          //               });
-          //             },
-          //             child: Image.asset("assets/b.jpg"),
-          //           ),
-          //           Text("Pixel color is: ${testimg.pixelColorAt!(x, y)}."),
-          //           Container(
-          //             width: 40,
-          //             height: 50,
-          //             color: testimg.pixelColorAt!(x, y),
-          //           )
-          //         ],
-          //       );
-          //     }),
+    
           ),
     );
   }
