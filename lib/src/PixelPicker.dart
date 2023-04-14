@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_color_picker/src/FindPixelColor.dart';
+import 'package:image_color_picker/src/PickerResponse.dart';
 
 class ColorPicker extends StatefulWidget {
   final Widget child;
-  final Function(Color color) onChanged;
+  final Widget? trackerImage;
+  final Function(PickerResponse color) onChanged;
 
-  const ColorPicker({
-    Key? key,
-    required this.child,
-    required this.onChanged,
-  }) : super(key: key);
+  const ColorPicker(
+      {Key? key,
+      required this.child,
+      required this.onChanged,
+      this.trackerImage})
+      : super(key: key);
 
   @override
   _ColorPickerState createState() => _ColorPickerState();
@@ -45,12 +48,18 @@ class _ColorPickerState extends State<ColorPicker> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: StackFit.loose,
       children: [
         RepaintBoundary(
           key: _repaintBoundaryKey,
           child: InteractiveViewer(
             key: _interactiveViewerKey,
             maxScale: 10,
+            onInteractionStart: ((details) {
+              final _offset = details.focalPoint;
+              fingerPostion = details.focalPoint;
+              _onInteract(_offset);
+            }),
             onInteractionUpdate: (details) {
               final _offset = details.focalPoint;
               fingerPostion = details.focalPoint;
@@ -60,17 +69,17 @@ class _ColorPickerState extends State<ColorPicker> {
           ),
         ),
         Positioned(
-          left: fingerPostion.dx,
-          top: fingerPostion.dy - 40,
-          child: Container(
-            height: 30,
-            width: 30,
-            child: Text(
-              "${selectedColor?.getHexCode()}",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        )
+            left: fingerPostion.dx,
+            top: fingerPostion.dy - 30,
+            child: widget.trackerImage == null
+                ? Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.white, width: 1)),
+                  )
+                : widget.trackerImage!)
       ],
     );
   }
@@ -95,7 +104,16 @@ class _ColorPickerState extends State<ColorPicker> {
 
     final _color = await _colorPicker!.getColor(pixelPosition: _localOffset);
     selectedColor = _color;
-    widget.onChanged(_color);
+    PickerResponse response = PickerResponse(
+        selectedColor ?? Colors.black,
+        selectedColor?.red ?? 0,
+        selectedColor?.blue ?? 0,
+        selectedColor?.green ?? 0,
+        selectedColor?.getHexCode() ?? "null",
+        fingerPostion.dx,
+        fingerPostion.dy);
+
+    widget.onChanged(response);
   }
 
   _findLocalOffset(Offset offset) {
