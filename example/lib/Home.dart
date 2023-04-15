@@ -12,9 +12,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   Color? color;
   PickerResponse? userResponse;
 
-  var x = 50;
-  var y = 25;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
