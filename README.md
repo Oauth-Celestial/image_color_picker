@@ -6,14 +6,20 @@ Image color picker allows you to sample specific colors from an image and obtain
 
 # Example 
 
-<video controls>
-  <source src="assets/Demo.mp4" type="video/mp4">
-</video>
+
+
+
+
+
+https://user-images.githubusercontent.com/119127289/233433363-10709d10-0936-467f-8b6c-cf6220faf7b2.mp4
+
+
+
 
 
 # Add Dependency
 ```
-image_color_picker : any
+pick_color : any
 ```
 
 
