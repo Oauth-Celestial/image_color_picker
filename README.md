@@ -3,6 +3,20 @@
 Image color picker allows you to sample specific colors from an image and obtain their hex color code by just dragging over the image area.
 
 
+
+# Example 
+
+<video controls>
+  <source src="assets/Demo.mp4" type="video/mp4">
+</video>
+
+
+# Add Dependency
+```
+image_color_picker : any
+```
+
+
 # Usage 
 
 ```
@@ -20,7 +34,12 @@ Image color picker allows you to sample specific colors from an image and obtain
         // Get Green Channel Color
         int greenValue = response.greenScale;  
                   
-});       
+});    
 ```
+
+
+That's all it takes 😃
+
+Feel Free to contribute or file an issue happy coding.
 
 

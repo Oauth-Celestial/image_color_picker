@@ -1,7 +1,8 @@
-name: image_color_picker
-description: A new Flutter package project.
+name: pick_color
+description: Extract color from image with simple touch
 version: 0.0.1
-homepage:
+repository: "https://github.com/Oauth-Celestial/image_color_picker"
+
 
 environment:
   sdk: '>=2.18.6 <3.0.0'

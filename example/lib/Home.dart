@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_color_picker/image_color_picker.dart';
+import 'package:pick_color/pick_color.dart';
 
 class ImagePickerScreen extends StatefulWidget {
   @override

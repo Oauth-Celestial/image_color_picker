@@ -2,8 +2,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_color_picker/src/FindPixelColor.dart';
-import 'package:image_color_picker/src/PickerResponse.dart';
+import 'package:pick_color/pick_color.dart';
+import 'package:pick_color/src/FindPixelColor.dart';
 
 class ColorPicker extends StatefulWidget {
   final Widget child;
