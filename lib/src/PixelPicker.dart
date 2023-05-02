@@ -1,19 +1,22 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pick_color/pick_color.dart';
 import 'package:pick_color/src/FindPixelColor.dart';
 
 class ColorPicker extends StatefulWidget {
   final Widget child;
   final Widget? trackerImage;
+  final bool? showMarker;
   final Function(PickerResponse color) onChanged;
 
+  /// child: Pass the Image  widget as a child to the method
+  /// onChanged : Returns a PickResponse class object
   const ColorPicker(
       {Key? key,
       required this.child,
       required this.onChanged,
+      this.showMarker,
       this.trackerImage})
       : super(key: key);
 
@@ -68,18 +71,24 @@ class _ColorPickerState extends State<ColorPicker> {
             child: widget.child,
           ),
         ),
-        Positioned(
-            left: fingerPostion.dx,
-            top: fingerPostion.dy - 30,
-            child: widget.trackerImage == null
-                ? Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.white, width: 1)),
-                  )
-                : widget.trackerImage!)
+        if (widget.showMarker ?? false) ...[
+          Positioned(
+              left: fingerPostion.dx,
+              top: fingerPostion.dy - 50,
+              child: widget.trackerImage == null
+                  ? Container(
+                      width: 50,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(
+                              color: selectedColor ?? Colors.transparent,
+                              width: 10)),
+                      child: Text("+"),
+                    )
+                  : widget.trackerImage!)
+        ]
       ],
     );
   }

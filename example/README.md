@@ -46,6 +46,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         children: [
           ColorPicker(
               child: image,
+              showMarker: true
               onChanged: (response) {
                 setState(() {
                   userResponse = response;
