@@ -8,9 +8,15 @@ Pick_Color allows you to sample specific colors from an image and obtain their h
 
 <!-- # Example 
 
-<video controls>
-  <source src="https://user-images.githubusercontent.com/119127289/233433363-10709d10-0936-467f-8b6c-cf6220faf7b2.mp4" type="video/mp4">
-</video> -->
+
+
+
+
+
+https://user-images.githubusercontent.com/119127289/233433363-10709d10-0936-467f-8b6c-cf6220faf7b2.mp4
+
+
+
 
 
 # Add Dependency
