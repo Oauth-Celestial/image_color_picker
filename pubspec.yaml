@@ -1,6 +1,6 @@
 name: pick_color
 description: A Flutter package which allow you to extract color and hexcode from image with simple touch.
-version: 0.0.3
+version: 0.0.4
 repository: "https://github.com/Oauth-Celestial/image_color_picker"
 
 

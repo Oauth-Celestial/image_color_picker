@@ -12,6 +12,7 @@ class ColorPicker extends StatefulWidget {
 
   /// child: Pass the Image  widget as a child to the method
   /// onChanged : Returns a PickResponse class object
+
   const ColorPicker(
       {Key? key,
       required this.child,
@@ -24,12 +25,6 @@ class ColorPicker extends StatefulWidget {
   _ColorPickerState createState() => _ColorPickerState();
 }
 
-extension hexcode on Color {
-  String getHexCode() {
-    return '#${this.value.toRadixString(16)}';
-  }
-}
-
 class _ColorPickerState extends State<ColorPicker> {
   FindPixelColor? _colorPicker;
   Offset fingerPostion = Offset(0, 0);
@@ -37,6 +32,10 @@ class _ColorPickerState extends State<ColorPicker> {
 
   final _repaintBoundaryKey = GlobalKey();
   final _interactiveViewerKey = GlobalKey();
+
+  ///The method first obtains a reference to a RenderRepaintBoundary object by using the _repaintBoundaryKey.currentContext!.findRenderObject() method.
+  ///The _repaintBoundaryKey is a GlobalKey that is associated with the widget that needs to be captured. The findRenderObject() method
+  ///finds the associated render object and returns it as a RenderObject type.
 
   Future<ui.Image> _loadSnapshot() async {
     final RenderRepaintBoundary _repaintBoundary =
@@ -58,11 +57,15 @@ class _ColorPickerState extends State<ColorPicker> {
           child: InteractiveViewer(
             key: _interactiveViewerKey,
             maxScale: 10,
+
+            /// Starts Tracking the user finger moment this is useful when user taps on the screen
             onInteractionStart: ((details) {
               final _offset = details.focalPoint;
               fingerPostion = details.focalPoint;
               _onInteract(_offset);
             }),
+
+            /// Starts Tracking the user finger moment when user is dragging his finger on image and updates the color
             onInteractionUpdate: (details) {
               final _offset = details.focalPoint;
               fingerPostion = details.focalPoint;
@@ -71,6 +74,8 @@ class _ColorPickerState extends State<ColorPicker> {
             child: widget.child,
           ),
         ),
+// TODO :- Resolve pointer issue in interative view
+
         if (widget.showMarker ?? false) ...[
           Positioned(
               left: fingerPostion.dx,
@@ -93,6 +98,8 @@ class _ColorPickerState extends State<ColorPicker> {
     );
   }
 
+  /// Responsible For converting the offset information to Picker Response .
+  /// The Method is called onInteraction start or onInteractionUpdate Method
   _onInteract(Offset offset) async {
     if (_colorPicker == null) {
       final _snapshot = await _loadSnapshot();
@@ -126,6 +133,7 @@ class _ColorPickerState extends State<ColorPicker> {
     widget.onChanged(response);
   }
 
+  /// Responsible For converting global offset of the screen to local offset
   _findLocalOffset(Offset offset) {
     final RenderBox _interactiveViewerBox =
         _interactiveViewerKey.currentContext!.findRenderObject() as RenderBox;
@@ -151,4 +159,9 @@ extension HexColor on Color {
       '${red.toRadixString(16).padLeft(2, '0')}'
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
+
+  /// Convert Color To HexCode
+  String getHexCode() {
+    return '#${this.value.toRadixString(16)}';
+  }
 }
